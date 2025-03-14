@@ -23,24 +23,6 @@ export const rooms = [
         destination: "room 5",
       },
     ],
-    npcs: [
-      {
-        name: "dragon",
-        state: {
-          happiness: false,
-          hunger: true,
-        },
-        actions: ["say a joke", "talk", "offer food"],
-      },
-      {
-        name: "tiger",
-        state: {
-          happiness: false,
-          hunger: true,
-        },
-        actions: ["feed", "talk", "annoy"],
-      },
-    ],
   },
   {
     number: 2,
