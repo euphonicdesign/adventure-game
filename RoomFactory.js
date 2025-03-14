@@ -29,7 +29,6 @@ export class RoomFactory {
 
   loadRooms() {
     const loadedRooms = JSON.parse(localStorage.getItem("rooms"));
-    console.log(loadedRooms);
     this.#rooms = [];
 
     for (let loadedRoom of loadedRooms) {

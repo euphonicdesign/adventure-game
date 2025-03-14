@@ -15,6 +15,10 @@ export class NPCFairy extends NPC {
       globalConditions.player.inventory = inventory.filter(
         (item) => item !== "book"
       );
+
+      if (!globalConditions.player.inventory.includes("book")) {
+        this.removeAction(action);
+      }
     }
     return this.response;
   }

@@ -14,16 +14,20 @@ export class NPCDragon extends NPC {
       this.#checkWinningConditions();
     }
     if (action === "offer food") {
-      this.state.hunger = false;
-      this.response.reply = "Thanks for the food!";
-      globalConditions.player.inventory = inventory.filter(
-        (item) => item !== "food"
-      );
+      if (!inventory.includes("food")) {
+        this.response.reply = "You have no food left...";
+      } else {
+        this.state.hunger = false;
+        this.response.reply = "Thanks for the food!";
+        globalConditions.player.inventory = inventory.filter(
+          (item) => item !== "food"
+        );
 
-      if (!globalConditions.player.inventory.includes("food")) {
-        this.removeAction(action);
+        if (!globalConditions.player.inventory.includes("food")) {
+          this.removeAction(action);
+        }
+        this.#checkWinningConditions();
       }
-      this.#checkWinningConditions();
     }
     if (action === "talk") {
       if (globalConditions.conditions.fedTheTiger) {

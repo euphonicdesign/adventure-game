@@ -32,17 +32,27 @@ export class Game {
 
   displayCurrentRoom() {
     this.#contentElement.innerHTML = "";
-    const loadElement = document.createElement("button");
-    loadElement.classList.add("load-button");
-    loadElement.innerText = "Load previous game";
-    this.#contentElement.prepend(loadElement);
-    loadElement.addEventListener("click", () => {
-      this.loadGameState();
-    });
-
+    this.displaySaveAndLoadButtons();
     this.displayRoomDescriptionAndPlayerInventory();
     this.displayActions();
     this.displayNPCActions();
+  }
+  displaySaveAndLoadButtons() {
+    const saveElement = document.createElement("button");
+    saveElement.classList.add("save-button");
+    saveElement.innerText = "Save game";
+    this.#contentElement.prepend(saveElement);
+    saveElement.addEventListener("click", () => {
+      this.saveGameState(this.#currentRoom.getName());
+    });
+
+    const loadElement = document.createElement("button");
+    loadElement.classList.add("load-button");
+    loadElement.innerText = "Load previous game";
+    this.#contentElement.append(loadElement);
+    loadElement.addEventListener("click", () => {
+      this.loadGameState();
+    });
   }
 
   displayRoomDescriptionAndPlayerInventory() {
@@ -60,7 +70,7 @@ export class Game {
         <h1>${currentRoomName}</h1>
         <p class="tester-room-description">${this.#currentRoom.getDescription()}</p>
         <p>Player inventory: ${globalConditions.player.inventory.join(", ")}</p>
-        <p class="tooltip">Go to: </p>
+        <p class="tooltip">Go: </p>
       </div>
     `;
   }
@@ -89,10 +99,10 @@ export class Game {
         const tooltipContent = this.#roomFactory
           .getRoom(potentialDestination)
           .getName();
-        tooltip.textContent = "Go to: " + tooltipContent;
+        tooltip.textContent = "Go: " + tooltipContent;
       });
       actionButton.addEventListener("mouseleave", () => {
-        tooltip.textContent = "Go to: ";
+        tooltip.textContent = "Go: ";
       });
     }
 
@@ -102,7 +112,6 @@ export class Game {
   displayNPCActions() {
     // NPC actions
     const npcs = this.#currentRoom.getNPCs();
-    console.log(npcs);
 
     let npcsContainerElement = document.querySelector(".npcs-container");
     if (!npcsContainerElement) {
@@ -172,7 +181,6 @@ export class Game {
 
     this.displayRoomDescriptionAndPlayerInventory();
     this.displayNPCActions();
-    this.saveGameState(this.#currentRoom.getName());
   }
 
   performAction(e, testerEvent) {
@@ -181,7 +189,6 @@ export class Game {
     this.#contentElement.innerHTML = "";
     this.#currentRoom = this.#roomFactory.getRoom(destination);
     this.displayCurrentRoom();
-    this.saveGameState(this.#currentRoom.getName());
   }
 
   saveGameState(currentRoom) {

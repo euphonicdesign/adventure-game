@@ -5,14 +5,17 @@ body {
   max-width: 80%;
 }
 
-.load-button {
+.load-button,
+.save-button {
   margin-top: 1em;
+  margin-right: 0.5em;
   background-color: white;
   border: 1px solid black;
   border-radius: 4px;
   padding: 0.3em;
 }
-.load-button:hover {
+.load-button:hover,
+.save-button:hover {
   background-color: #333;
   color: white;
 }
