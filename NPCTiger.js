@@ -4,8 +4,14 @@ import { NPC } from "./NPC.js";
 export class NPCTiger extends NPC {
   interact(action) {
     this.response.reply = "";
+    this.response.returnedObjects = [];
+    let inventory = globalConditions.player.inventory;
+
     if (action === "feed") {
-      if (this.state.hunger) {
+      if (!inventory.includes("food")) {
+        this.response.reply = "You don't have any food...";
+        // return this.response;
+      } else if (this.state.hunger) {
         this.state.hunger = false;
         globalConditions.conditions.fedTheTiger = true;
         this.response.reply =

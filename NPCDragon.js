@@ -16,7 +16,10 @@ export class NPCDragon extends NPC {
     if (action === "offer food") {
       this.state.hunger = false;
       this.response.reply = "Thanks for the food!";
-      inventory = inventory.filter((item) => item !== "food");
+      globalConditions.player.inventory = inventory.filter(
+        (item) => item !== "food"
+      );
+
       if (!inventory.includes("food")) {
         this.removeAction(action);
       }
