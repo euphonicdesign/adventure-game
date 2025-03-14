@@ -1,5 +1,5 @@
-import { Game } from "./app.js";
-import { removeWhiteSpacesAndAddDashes } from "./utils.js";
+import { Game } from "../app.js";
+import { removeWhiteSpacesAndAddDashes } from "../utils.js";
 
 export class Tester {
   contentElement;
@@ -9,7 +9,7 @@ export class Tester {
     this.game = new Game();
     this.game.displayCurrentRoom();
     this.contentElement = this.game.getContentElement();
-    this.loadTestsFromCSV("./test_cases.csv");
+    this.loadTestsFromCSV("./utils/test_cases.csv");
   }
 
   async loadTestsFromCSV(url) {

@@ -1,6 +1,6 @@
 import { Room } from "./Room.js";
 import { RoomFactory } from "./RoomFactory.js";
-import { Tester } from "./Tester.js";
+import { Tester } from "./utils/Tester.js";
 import { removeWhiteSpacesAndAddDashes } from "./utils.js";
 import { globalConditions, setGlobalConditions } from "./globalConditions.js";
 
@@ -68,6 +68,10 @@ export class Game {
     // New destination actions
     const actionsContainerElement = document.createElement("div");
     actionsContainerElement.setAttribute("id", "actions-container");
+
+    const tooltip = document.createElement("div");
+    tooltip.className = "tooltip";
+
     const actions = this.#currentRoom.getActions();
     for (let action of actions) {
       const actionButton = document.createElement("button");
@@ -79,7 +83,22 @@ export class Game {
       actionButton.dataset.destination = action.destination;
       actionsContainerElement.append(actionButton);
       actionButton.addEventListener("click", this.performAction.bind(this));
+
+      actionButton.addEventListener("mouseenter", (e) => {
+        const potentialDestination = action.destination;
+        const tooltipContent = this.#roomFactory
+          .getRoom(potentialDestination)
+          .getName();
+        tooltip.textContent = tooltipContent;
+        tooltip.style.display = "block";
+      });
+      actionButton.addEventListener("mouseleave", () => {
+        tooltip.style.display = "none";
+      });
     }
+
+    actionsContainerElement.append(tooltip);
+
     this.#contentElement.append(actionsContainerElement);
   }
 
@@ -182,7 +201,7 @@ export class Game {
   }
 }
 
-const game = new Game();
-game.displayCurrentRoom();
+// const game = new Game();
+// game.displayCurrentRoom();
 
-// const tester = new Tester();
+const tester = new Tester();
