@@ -12,7 +12,7 @@ export const rooms = [
       },
       {
         action: "right",
-        destination: "room 3",
+        destination: "hill",
       },
       {
         action: "up",
@@ -53,7 +53,7 @@ export const rooms = [
         destination: "starting place",
       },
       // {
-      //   action: "left",
+      //   action: "underwater",
       //   destination: "underwater",
       // },
     ],
@@ -76,8 +76,8 @@ export const rooms = [
     description: `You are now underwater`,
     actions: [
       {
-        action: "left",
-        destination: "starting place",
+        action: "surface",
+        destination: "swamp",
       },
     ],
   },
@@ -120,6 +120,27 @@ export const rooms = [
           defeated: false,
         },
         actions: ["attack"],
+      },
+    ],
+  },
+  {
+    number: 6,
+    name: "hill",
+    description: `You are at the top of a hill... You notice a windmill and someone nearby.
+    `,
+    actions: [
+      {
+        action: "left",
+        destination: "starting place",
+      },
+    ],
+    npcs: [
+      {
+        name: "inventor",
+        state: {
+          hadTalked: false,
+        },
+        actions: ["talk"],
       },
     ],
   },

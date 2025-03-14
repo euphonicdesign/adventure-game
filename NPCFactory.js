@@ -4,6 +4,7 @@ import { NPCTiger } from "./ch1/NPCTiger.js";
 import { NPCFairy } from "./ch1/NPCFairy.js";
 import { NPCMonkey } from "./ch1/NPCMonkey.js";
 import { NPCRock } from "./ch1/NPCRock.js";
+import { NPCInventor } from "./ch1/NPCInventor.js";
 
 export class NPCFactory {
   #npcs;
@@ -29,6 +30,9 @@ export class NPCFactory {
       }
       if (name === "rock") {
         newNPC = new NPCRock(name, state, actions);
+      }
+      if (name === "inventor") {
+        newNPC = new NPCInventor(name, state, actions);
       }
 
       this.#npcs.push(newNPC);

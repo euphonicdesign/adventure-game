@@ -174,7 +174,7 @@ export class Game {
     const action = e.target.textContent;
     const response = this.#currentRoom
       .getNPC(npcName)
-      .interact(action, this.#currentRoom);
+      .interact(action, this.#currentRoom, this.#roomFactory);
     // console.log("response: ", response);
 
     npcResponseElement.textContent = response.reply;
