@@ -105,6 +105,7 @@ export class Game {
   displayNPCActions() {
     // NPC actions
     const npcs = this.#currentRoom.getNPCs();
+    console.log(npcs);
 
     let npcsContainerElement = document.querySelector(".npcs-container");
     if (!npcsContainerElement) {
@@ -201,7 +202,7 @@ export class Game {
   }
 }
 
-// const game = new Game();
-// game.displayCurrentRoom();
+const game = new Game();
+game.displayCurrentRoom();
 
-const tester = new Tester();
+// const tester = new Tester();

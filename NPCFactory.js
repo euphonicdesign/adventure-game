@@ -1,6 +1,7 @@
 import { NPC } from "./NPC.js";
 import { NPCDragon } from "./ch1/NPCDragon.js";
 import { NPCTiger } from "./ch1/NPCTiger.js";
+import { NPCFairy } from "./ch1/NPCFairy.js";
 
 export class NPCFactory {
   #npcs;
@@ -18,6 +19,11 @@ export class NPCFactory {
       }
       if (name === "tiger") {
         const newNPC = new NPCTiger(name, state, actions);
+        this.#npcs.push(newNPC);
+        return newNPC;
+      }
+      if (name === "fairy") {
+        const newNPC = new NPCFairy(name, state, actions);
         this.#npcs.push(newNPC);
         return newNPC;
       }

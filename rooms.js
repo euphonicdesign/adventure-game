@@ -8,7 +8,7 @@ export const rooms = [
     actions: [
       {
         action: "left",
-        destination: "room 2",
+        destination: "creative place",
       },
       {
         action: "right",
@@ -44,13 +44,23 @@ export const rooms = [
   },
   {
     number: 2,
-    name: "room 2",
+    name: "creative place",
     description: `You chose to go to the creative side of the realm.
     `,
     actions: [
       {
         action: "return",
         destination: "starting place",
+      },
+    ],
+    npcs: [
+      {
+        name: "fairy",
+        state: {
+          happiness: false,
+          hunger: true,
+        },
+        actions: ["talk", "offer book"],
       },
     ],
   },
