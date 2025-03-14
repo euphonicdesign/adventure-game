@@ -19,8 +19,9 @@ export class Room {
     let room;
     if (loadedRooms) {
       room = loadedRooms.find((room) => room.name === this.name);
-      console.log("loaded room: ", room.number);
-      console.log("loaded npcs", room.npcs);
+      if (!room) {
+        room = rooms.find((room) => room.name === this.name);
+      }
     } else {
       room = rooms.find((room) => room.name === this.name);
     }

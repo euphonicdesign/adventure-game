@@ -155,7 +155,7 @@ export class Game {
 
     this.displayRoomDescriptionAndPlayerInventory();
     this.displayNPCActions();
-    this.saveGameState(this.#currentRoom);
+    this.saveGameState(this.#currentRoom.getName());
   }
 
   performAction(e, testerEvent) {
@@ -169,7 +169,7 @@ export class Game {
 
   saveGameState(currentRoom) {
     this.#roomFactory.saveRooms();
-    localStorage.setItem("currentRoom", JSON.stringify(currentRoom.getName()));
+    localStorage.setItem("currentRoom", JSON.stringify(currentRoom));
     localStorage.setItem("globalConditions", JSON.stringify(globalConditions));
   }
 

@@ -11,7 +11,7 @@ export const rooms = [
         destination: "room 2",
       },
       {
-        action: "right very long string",
+        action: "right",
         destination: "room 3",
       },
       {
