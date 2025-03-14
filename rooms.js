@@ -139,8 +139,31 @@ export const rooms = [
         name: "inventor",
         state: {
           hadTalked: false,
+          usedBinoculars: false,
         },
         actions: ["talk"],
+      },
+    ],
+  },
+  {
+    number: 7,
+    name: "house",
+    description: `You are inside the house.
+    `,
+    actions: [
+      {
+        action: "left",
+        destination: "hill",
+      },
+    ],
+    npcs: [
+      {
+        name: "house",
+        state: {
+          hasPickedFood: false,
+          hasPickedMoney: false,
+        },
+        actions: ["pick food", "pick money"],
       },
     ],
   },

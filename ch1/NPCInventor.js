@@ -19,8 +19,24 @@ export class NPCInventor extends NPC {
           action: "dive",
           destination: "underwater",
         });
+
+        this.actions.push("use binoculars");
       } else {
         this.response.reply = "Thanks for passing by! :)";
+      }
+    }
+    if (action === "use binoculars") {
+      if (!this.state.usedBinoculars) {
+        this.state.usedBinoculars = true;
+        this.response.reply =
+          "You look through the binoculars and notice a house nearby...";
+        currentRoom.actions.push({
+          action: "right",
+          destination: "house",
+        });
+      } else {
+        this.response.reply =
+          "You look through the binoculars and notice a house nearby...";
       }
     }
 
