@@ -1,6 +1,6 @@
 import { NPC } from "./NPC.js";
-import { NPCDragon } from "./NPCDragon.js";
-import { NPCTiger } from "./NPCTiger.js";
+import { NPCDragon } from "./ch1/NPCDragon.js";
+import { NPCTiger } from "./ch1/NPCTiger.js";
 
 export class NPCFactory {
   #npcs;

@@ -1,11 +1,13 @@
 body {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  margin: 0 auto;
+  max-width: 80%;
 }
 
 #actions-container,
 .npc-actions-container {
-  margin-left: 2em;
+  /* margin-left: 2em; */
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
@@ -13,7 +15,7 @@ body {
 
 .npc-name {
   margin-top: 2rem;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
   font-weight: bold;
 }
 

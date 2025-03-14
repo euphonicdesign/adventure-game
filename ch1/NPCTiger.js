@@ -1,5 +1,5 @@
-import { globalConditions } from "./globalConditions.js";
-import { NPC } from "./NPC.js";
+import { globalConditions } from "../globalConditions.js";
+import { NPC } from "../NPC.js";
 
 export class NPCTiger extends NPC {
   interact(action) {

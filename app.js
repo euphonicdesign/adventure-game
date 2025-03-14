@@ -44,15 +44,11 @@ export class Game {
       this.#contentElement.append(roomDetailsElement);
     }
     roomDetailsElement.innerHTML = `
-      <ul>
-        <li>room number: ${this.#currentRoom.getNumber()}</li>
-        <li>room name: ${this.#currentRoom.getName()}</li>
-        <li>room description:</li>
-        <li class="tester-room-description">${this.#currentRoom.getDescription()}</li>
-        <li>player inventory: ${globalConditions.player.inventory.join(
-          ", "
-        )}</li>
-      </ul>
+      <div>
+        <h1>${this.#currentRoom.getName()}</h1>
+        <p class="tester-room-description">${this.#currentRoom.getDescription()}</p>
+        <p>player inventory: ${globalConditions.player.inventory.join(", ")}</p>
+      </div>
     `;
   }
 
@@ -158,7 +154,7 @@ export class Game {
   }
 }
 
-// const game = new Game();
-// game.displayCurrentRoom();
-// console.log(game);
-const tester = new Tester();
+const game = new Game();
+game.displayCurrentRoom();
+
+// const tester = new Tester();
