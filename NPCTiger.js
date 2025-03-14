@@ -14,6 +14,10 @@ export class NPCTiger extends NPC {
       } else if (this.state.hunger) {
         this.state.hunger = false;
         globalConditions.conditions.fedTheTiger = true;
+        globalConditions.player.inventory = inventory.filter(
+          (item) => item !== "food"
+        );
+        this.removeAction(action);
         this.response.reply =
           "Thanks for the food! I'm not feeling hungry anymore...";
         this.#checkWinningConditions();

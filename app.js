@@ -1,8 +1,10 @@
 import { Room } from "./Room.js";
 import { RoomFactory } from "./RoomFactory.js";
+import { Tester } from "./Tester.js";
 import { globalConditions } from "./globalConditions.js";
+import { removeWhiteSpacesAndAddDashes } from "./utils.js";
 
-class Game {
+export class Game {
   #contentElement;
   #currentRoom;
   #roomFactory;
@@ -10,6 +12,14 @@ class Game {
     this.#initialize();
     this.#roomFactory = new RoomFactory();
     this.#currentRoom = this.#roomFactory.getRoom("starting place");
+  }
+
+  getContentElement() {
+    return this.#contentElement;
+  }
+
+  getCurrentRoom() {
+    return this.#currentRoom;
   }
 
   #initialize() {
@@ -21,12 +31,12 @@ class Game {
   }
 
   displayCurrentRoom() {
-    this.#displayRoomDescriptionAndPlayerInventory();
-    this.#displayActions();
-    this.#displayNPCActions();
+    this.displayRoomDescriptionAndPlayerInventory();
+    this.displayActions();
+    this.displayNPCActions();
   }
 
-  #displayRoomDescriptionAndPlayerInventory() {
+  displayRoomDescriptionAndPlayerInventory() {
     let roomDetailsElement = document.querySelector(".room-details-container");
     if (!roomDetailsElement) {
       roomDetailsElement = document.createElement("div");
@@ -37,7 +47,8 @@ class Game {
       <ul>
         <li>room number: ${this.#currentRoom.getNumber()}</li>
         <li>room name: ${this.#currentRoom.getName()}</li>
-        <li>room description: ${this.#currentRoom.getDescription()}</li>
+        <li>room description:</li>
+        <li class="tester-room-description">${this.#currentRoom.getDescription()}</li>
         <li>player inventory: ${globalConditions.player.inventory.join(
           ", "
         )}</li>
@@ -45,7 +56,7 @@ class Game {
     `;
   }
 
-  #displayActions() {
+  displayActions() {
     // New destination actions
     const actionsContainerElement = document.createElement("div");
     actionsContainerElement.setAttribute("id", "actions-container");
@@ -53,15 +64,18 @@ class Game {
     for (let action of actions) {
       const actionButton = document.createElement("button");
       actionButton.classList.add("action-button");
+      actionButton.classList.add(
+        `tester-action-button-${removeWhiteSpacesAndAddDashes(action.action)}`
+      );
       actionButton.textContent = action.action;
       actionButton.dataset.destination = action.destination;
       actionsContainerElement.append(actionButton);
-      actionButton.addEventListener("click", this.#performAction.bind(this));
+      actionButton.addEventListener("click", this.performAction.bind(this));
     }
     this.#contentElement.append(actionsContainerElement);
   }
 
-  #displayNPCActions() {
+  displayNPCActions() {
     // NPC actions
     const npcs = this.#currentRoom.getNPCs();
 
@@ -86,10 +100,14 @@ class Game {
 
       const npcActionsContainerElement = document.createElement("div");
       npcActionsContainerElement.classList.add("npc-actions-container");
+      npcActionsContainerElement.classList.add(
+        `tester-${npc.getName()}-npc-actions-container`
+      );
       npcContainerElement.append(npcActionsContainerElement);
 
       const npcResponseElement = document.createElement("div");
       npcResponseElement.classList.add("npc-response");
+      npcResponseElement.classList.add(`tester-${npc.getName()}-response`);
       npcResponseElement.textContent = npc.response.reply;
       npcContainerElement.append(npcResponseElement);
 
@@ -97,17 +115,23 @@ class Game {
       for (let action of actions) {
         const actionButton = document.createElement("button");
         actionButton.classList.add("npc-action-button");
+        actionButton.classList.add(
+          `tester-${npc.getName()}-${removeWhiteSpacesAndAddDashes(
+            action
+          )}-button`
+        );
+
         actionButton.textContent = action;
         actionButton.dataset.npcName = npc.getName();
         actionButton.addEventListener("click", (e) => {
-          this.#interactNPC(e, npcResponseElement);
+          this.interactNPC(e, npcResponseElement);
         });
         npcActionsContainerElement.append(actionButton);
       }
     }
   }
 
-  #interactNPC(e, npcResponseElement) {
+  interactNPC(e, npcResponseElement) {
     const npcName = e.target.dataset.npcName;
     const action = e.target.textContent;
     const response = this.#currentRoom.getNPC(npcName).interact(action);
@@ -121,12 +145,12 @@ class Game {
       ...returnedObjects,
     ];
 
-    this.#displayRoomDescriptionAndPlayerInventory();
-    this.#displayNPCActions();
+    this.displayRoomDescriptionAndPlayerInventory();
+    this.displayNPCActions();
   }
 
-  #performAction(e) {
-    const destination = e.target.dataset.destination;
+  performAction(e, testerEvent) {
+    const destination = e?.target.dataset.destination || testerEvent;
     // change room and display actions
     this.#contentElement.innerHTML = "";
     this.#currentRoom = this.#roomFactory.getRoom(destination);
@@ -134,6 +158,7 @@ class Game {
   }
 }
 
-const game = new Game();
-game.displayCurrentRoom();
+// const game = new Game();
+// game.displayCurrentRoom();
 // console.log(game);
+const tester = new Tester();
