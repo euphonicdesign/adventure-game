@@ -169,15 +169,14 @@ export class Game {
 
   saveGameState(currentRoom) {
     this.#roomFactory.saveRooms();
-    localStorage.setItem("currentRoom", JSON.stringify(currentRoom));
+    localStorage.setItem("currentRoom", JSON.stringify(currentRoom.getName()));
     localStorage.setItem("globalConditions", JSON.stringify(globalConditions));
   }
 
   loadGameState() {
     this.#roomFactory.loadRooms();
     const currentRoom = JSON.parse(localStorage.getItem("currentRoom"));
-    // this.#currentRoom = this.#roomFactory.getRoom(currentRoom);
-    console.log(JSON.parse(localStorage.getItem("globalConditions")));
+    this.#currentRoom = this.#roomFactory.getRoom(currentRoom);
     setGlobalConditions(JSON.parse(localStorage.getItem("globalConditions")));
     this.displayCurrentRoom();
   }

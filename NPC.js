@@ -1,10 +1,10 @@
 export class NPC {
-  #name;
+  name;
   state;
   actions;
   response;
   constructor(name, state, actions) {
-    this.#name = name;
+    this.name = name;
     this.state = state;
     this.actions = actions;
     this.response = {
@@ -31,6 +31,6 @@ export class NPC {
   }
 
   getName() {
-    return this.#name;
+    return this.name;
   }
 }

@@ -7,7 +7,7 @@ export class RoomFactory {
   }
 
   getRoom(destination) {
-    console.log(this.#rooms);
+    // console.log(this.#rooms);
 
     const currentRoom = this.#rooms.find(
       (room) => room.getName() === destination
@@ -15,6 +15,7 @@ export class RoomFactory {
     if (!currentRoom) {
       const newRoom = new Room(destination);
       this.#rooms.push(newRoom);
+      // console.log("Not good!");
       return newRoom;
     }
     return currentRoom;
