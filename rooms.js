@@ -8,7 +8,7 @@ export const rooms = [
     actions: [
       {
         action: "left",
-        destination: "creative place",
+        destination: "swamp",
       },
       {
         action: "right",
@@ -16,7 +16,7 @@ export const rooms = [
       },
       {
         action: "up",
-        destination: "room 4",
+        destination: "dragon cave entrance",
       },
       {
         action: "down",
@@ -44,31 +44,36 @@ export const rooms = [
   },
   {
     number: 2,
-    name: "creative place",
-    description: `You chose to go to the creative side of the realm.
+    name: "swamp",
+    description: `You arrive at the swamp. What will you do next?
     `,
     actions: [
       {
-        action: "return",
+        action: "right",
         destination: "starting place",
       },
+      // {
+      //   action: "left",
+      //   destination: "underwater",
+      // },
     ],
     npcs: [
       {
-        name: "fairy",
-        state: {
-          happiness: false,
-          hunger: true,
-        },
-        actions: ["talk", "offer book"],
+        name: "monkey",
+        state: {},
+        actions: ["talk", "offer food"],
+      },
+      {
+        name: "tiger",
+        state: {},
+        actions: ["talk", "feed"],
       },
     ],
   },
   {
     number: 3,
-    name: "room 3",
-    description: `You have arrived at the bottom of a hill.
-    `,
+    name: "underwater",
+    description: `You are now underwater`,
     actions: [
       {
         action: "left",
@@ -78,8 +83,8 @@ export const rooms = [
   },
   {
     number: 4,
-    name: "room 4",
-    description: `You are at the top of a mountain.
+    name: "dragon cave entrance",
+    description: `You are at the entrance of a dragon cave. A large rock is blocking the way in.
     `,
     actions: [
       {
@@ -87,16 +92,34 @@ export const rooms = [
         destination: "starting place",
       },
     ],
+    npcs: [
+      {
+        name: "rock",
+        state: {
+          moved: false,
+        },
+        actions: ["move", "cry"],
+      },
+    ],
   },
   {
     number: 5,
-    name: "room 5",
-    description: `You went down the river.
+    name: "dragon cave",
+    description: `You are deep inside the cave. You stand in front of a fierce dragon...
     `,
     actions: [
       {
-        action: "up",
-        destination: "starting place",
+        action: "outside",
+        destination: "dragon cave entrance",
+      },
+    ],
+    npcs: [
+      {
+        name: "dragon",
+        state: {
+          defeated: false,
+        },
+        actions: ["attack"],
       },
     ],
   },

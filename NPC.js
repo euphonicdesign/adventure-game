@@ -14,7 +14,7 @@ export class NPC {
     };
   }
 
-  interact(action) {
+  interact(action, currentRoom) {
     throw new Error("Must be implemented in its subclass.");
   }
 

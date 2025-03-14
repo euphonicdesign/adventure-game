@@ -7,36 +7,18 @@ export class NPCTiger extends NPC {
     this.response.returnedObjects = [];
     let inventory = globalConditions.player.inventory;
 
+    if (action === "talk") {
+      this.response.reply = "Nice talking to you! says the tiger.";
+    }
+
     if (action === "feed") {
       if (!inventory.includes("food")) {
         this.response.reply = "You don't have any food...";
-        // return this.response;
-      } else if (this.state.hunger) {
-        this.state.hunger = false;
-        globalConditions.conditions.fedTheTiger = true;
-        globalConditions.player.inventory = inventory.filter(
-          (item) => item !== "food"
-        );
-        this.removeAction(action);
-        this.response.reply =
-          "Thanks for the food! I'm not feeling hungry anymore...";
-        this.#checkWinningConditions();
       } else {
-        this.response.reply = "I'm not feeling hungry anymore...";
+        this.response.reply = "Thanks for the food!";
       }
     }
-    if (action === "talk") {
-      this.response.reply = "Nice talking to you!";
-    }
-    if (action === "annoy") {
-      this.response.reply = "Why are you so annyoing";
-    }
-    return this.response;
-  }
 
-  #checkWinningConditions() {
-    if (!this.state.hunger) {
-      this.response.reply += " You are the best";
-    }
+    return this.response;
   }
 }

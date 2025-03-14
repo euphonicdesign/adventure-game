@@ -77,8 +77,14 @@ export class Game {
 
   displayActions() {
     // New destination actions
-    const actionsContainerElement = document.createElement("div");
-    actionsContainerElement.setAttribute("id", "actions-container");
+    let actionsContainerElement = document.querySelector("#actions-container");
+    if (!actionsContainerElement) {
+      actionsContainerElement = document.createElement("div");
+      actionsContainerElement.setAttribute("id", "actions-container");
+      this.#contentElement.append(actionsContainerElement);
+    }
+
+    actionsContainerElement.innerHTML = "";
 
     const tooltip = document.querySelector(".tooltip");
 
@@ -105,8 +111,6 @@ export class Game {
         tooltip.textContent = "Go: ";
       });
     }
-
-    this.#contentElement.append(actionsContainerElement);
   }
 
   displayNPCActions() {
@@ -168,7 +172,9 @@ export class Game {
   interactNPC(e, npcResponseElement) {
     const npcName = e.target.dataset.npcName;
     const action = e.target.textContent;
-    const response = this.#currentRoom.getNPC(npcName).interact(action);
+    const response = this.#currentRoom
+      .getNPC(npcName)
+      .interact(action, this.#currentRoom);
     // console.log("response: ", response);
 
     npcResponseElement.textContent = response.reply;
@@ -180,6 +186,7 @@ export class Game {
     ];
 
     this.displayRoomDescriptionAndPlayerInventory();
+    this.displayActions();
     this.displayNPCActions();
   }
 

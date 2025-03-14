@@ -1,7 +1,7 @@
 export let globalConditions = {
   player: {
     name: "Adventurer",
-    inventory: ["book", "sticks", "money", "food"],
+    inventory: ["book"],
   },
   conditions: {
     fedTheTiger: false,
