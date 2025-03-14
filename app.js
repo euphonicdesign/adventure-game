@@ -60,6 +60,7 @@ export class Game {
         <h1>${currentRoomName}</h1>
         <p class="tester-room-description">${this.#currentRoom.getDescription()}</p>
         <p>Player inventory: ${globalConditions.player.inventory.join(", ")}</p>
+        <p class="tooltip">Go to: </p>
       </div>
     `;
   }
@@ -69,8 +70,7 @@ export class Game {
     const actionsContainerElement = document.createElement("div");
     actionsContainerElement.setAttribute("id", "actions-container");
 
-    const tooltip = document.createElement("div");
-    tooltip.className = "tooltip";
+    const tooltip = document.querySelector(".tooltip");
 
     const actions = this.#currentRoom.getActions();
     for (let action of actions) {
@@ -89,15 +89,12 @@ export class Game {
         const tooltipContent = this.#roomFactory
           .getRoom(potentialDestination)
           .getName();
-        tooltip.textContent = tooltipContent;
-        tooltip.style.display = "block";
+        tooltip.textContent = "Go to: " + tooltipContent;
       });
       actionButton.addEventListener("mouseleave", () => {
-        tooltip.style.display = "none";
+        tooltip.textContent = "Go to: ";
       });
     }
-
-    actionsContainerElement.append(tooltip);
 
     this.#contentElement.append(actionsContainerElement);
   }
