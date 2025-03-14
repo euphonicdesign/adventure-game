@@ -1,0 +1,5 @@
+﻿#,action type,destination,npc name,npc action,new room description,npc response reply
+1,action,left,,,You chose to go to the creative side of the realm.,
+2,action,return,,,"It is a beautiful day outside. The room is full of sunshine. You decide to go out, and explore the surroundings.",
+3,npc-action,,dragon,talk,,What would you like to talk about?
+4,npc-action,,dragon,say a joke,,Nice joke!
