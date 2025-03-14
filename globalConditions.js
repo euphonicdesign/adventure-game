@@ -1,4 +1,4 @@
-export const globalConditions = {
+export let globalConditions = {
   player: {
     name: "Adventurer",
     inventory: ["book", "sticks", "money", "food"],
@@ -7,3 +7,7 @@ export const globalConditions = {
     fedTheTiger: false,
   },
 };
+
+export function setGlobalConditions(newGlobalConditions) {
+  globalConditions = newGlobalConditions;
+}

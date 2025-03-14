@@ -5,6 +5,18 @@ body {
   max-width: 80%;
 }
 
+.load-button {
+  margin-top: 1em;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 0.3em;
+}
+.load-button:hover {
+  background-color: #333;
+  color: white;
+}
+
 #actions-container,
 .npc-actions-container {
   /* margin-left: 2em; */
@@ -25,7 +37,7 @@ body {
 
 .npc-response {
   margin-top: 2rem;
-  margin-left: 2rem;
+  /* margin-left: 2rem; */
 }
 
 .action-button,

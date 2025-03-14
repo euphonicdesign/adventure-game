@@ -1,8 +1,8 @@
 import { Room } from "./Room.js";
 import { RoomFactory } from "./RoomFactory.js";
 import { Tester } from "./Tester.js";
-import { globalConditions } from "./globalConditions.js";
 import { removeWhiteSpacesAndAddDashes } from "./utils.js";
+import { globalConditions, setGlobalConditions } from "./globalConditions.js";
 
 export class Game {
   #contentElement;
@@ -31,6 +31,15 @@ export class Game {
   }
 
   displayCurrentRoom() {
+    this.#contentElement.innerHTML = "";
+    const loadElement = document.createElement("button");
+    loadElement.classList.add("load-button");
+    loadElement.innerText = "Load previous game";
+    this.#contentElement.prepend(loadElement);
+    loadElement.addEventListener("click", () => {
+      this.loadGameState();
+    });
+
     this.displayRoomDescriptionAndPlayerInventory();
     this.displayActions();
     this.displayNPCActions();
@@ -43,11 +52,14 @@ export class Game {
       roomDetailsElement.classList.add("room-details-container");
       this.#contentElement.append(roomDetailsElement);
     }
+
+    let currentRoomName = this.#currentRoom.getName().toUpperCase();
+
     roomDetailsElement.innerHTML = `
       <div>
-        <h1>${this.#currentRoom.getName()}</h1>
+        <h1>${currentRoomName}</h1>
         <p class="tester-room-description">${this.#currentRoom.getDescription()}</p>
-        <p>player inventory: ${globalConditions.player.inventory.join(", ")}</p>
+        <p>Player inventory: ${globalConditions.player.inventory.join(", ")}</p>
       </div>
     `;
   }
@@ -143,6 +155,7 @@ export class Game {
 
     this.displayRoomDescriptionAndPlayerInventory();
     this.displayNPCActions();
+    this.saveGameState(this.#currentRoom);
   }
 
   performAction(e, testerEvent) {
@@ -150,6 +163,22 @@ export class Game {
     // change room and display actions
     this.#contentElement.innerHTML = "";
     this.#currentRoom = this.#roomFactory.getRoom(destination);
+    this.displayCurrentRoom();
+    this.saveGameState(this.#currentRoom.getName());
+  }
+
+  saveGameState(currentRoom) {
+    this.#roomFactory.saveRooms();
+    localStorage.setItem("currentRoom", JSON.stringify(currentRoom));
+    localStorage.setItem("globalConditions", JSON.stringify(globalConditions));
+  }
+
+  loadGameState() {
+    this.#roomFactory.loadRooms();
+    const currentRoom = JSON.parse(localStorage.getItem("currentRoom"));
+    // this.#currentRoom = this.#roomFactory.getRoom(currentRoom);
+    console.log(JSON.parse(localStorage.getItem("globalConditions")));
+    setGlobalConditions(JSON.parse(localStorage.getItem("globalConditions")));
     this.displayCurrentRoom();
   }
 }

@@ -20,7 +20,7 @@ export class NPCDragon extends NPC {
         (item) => item !== "food"
       );
 
-      if (!inventory.includes("food")) {
+      if (!globalConditions.player.inventory.includes("food")) {
         this.removeAction(action);
       }
       this.#checkWinningConditions();
