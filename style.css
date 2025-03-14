@@ -1,0 +1,43 @@
+body {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+#actions-container,
+.npc-actions-container {
+  margin-left: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.npc-name {
+  margin-top: 2rem;
+  margin-left: 2rem;
+  font-weight: bold;
+}
+
+.npc-actions-container {
+  margin-top: 2rem;
+}
+
+.npc-response {
+  margin-top: 2rem;
+  margin-left: 2rem;
+}
+
+.action-button,
+.npc-action-button {
+  padding: 1em;
+  width: 10em;
+}
+
+.npc-action-button {
+  background-color: lightblue;
+  border-radius: 5px;
+  border: none;
+}
+
+.npc-action-button:hover {
+  background-color: lightslategray;
+}

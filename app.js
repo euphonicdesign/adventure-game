@@ -1,0 +1,139 @@
+import { Room } from "./Room.js";
+import { RoomFactory } from "./RoomFactory.js";
+import { globalConditions } from "./globalConditions.js";
+
+class Game {
+  #contentElement;
+  #currentRoom;
+  #roomFactory;
+  constructor() {
+    this.#initialize();
+    this.#roomFactory = new RoomFactory();
+    this.#currentRoom = this.#roomFactory.getRoom("starting place");
+  }
+
+  #initialize() {
+    const contentElement = document.createElement("section");
+    this.#contentElement = contentElement;
+    contentElement.setAttribute("id", "game-content");
+
+    document.body.prepend(contentElement);
+  }
+
+  displayCurrentRoom() {
+    this.#displayRoomDescriptionAndPlayerInventory();
+    this.#displayActions();
+    this.#displayNPCActions();
+  }
+
+  #displayRoomDescriptionAndPlayerInventory() {
+    let roomDetailsElement = document.querySelector(".room-details-container");
+    if (!roomDetailsElement) {
+      roomDetailsElement = document.createElement("div");
+      roomDetailsElement.classList.add("room-details-container");
+      this.#contentElement.append(roomDetailsElement);
+    }
+    roomDetailsElement.innerHTML = `
+      <ul>
+        <li>room number: ${this.#currentRoom.getNumber()}</li>
+        <li>room name: ${this.#currentRoom.getName()}</li>
+        <li>room description: ${this.#currentRoom.getDescription()}</li>
+        <li>player inventory: ${globalConditions.player.inventory.join(
+          ", "
+        )}</li>
+      </ul>
+    `;
+  }
+
+  #displayActions() {
+    // New destination actions
+    const actionsContainerElement = document.createElement("div");
+    actionsContainerElement.setAttribute("id", "actions-container");
+    const actions = this.#currentRoom.getActions();
+    for (let action of actions) {
+      const actionButton = document.createElement("button");
+      actionButton.classList.add("action-button");
+      actionButton.textContent = action.action;
+      actionButton.dataset.destination = action.destination;
+      actionsContainerElement.append(actionButton);
+      actionButton.addEventListener("click", this.#performAction.bind(this));
+    }
+    this.#contentElement.append(actionsContainerElement);
+  }
+
+  #displayNPCActions() {
+    // NPC actions
+    const npcs = this.#currentRoom.getNPCs();
+
+    let npcsContainerElement = document.querySelector(".npcs-container");
+    if (!npcsContainerElement) {
+      npcsContainerElement = document.createElement("div");
+      npcsContainerElement.classList.add("npcs-container");
+      this.#contentElement.append(npcsContainerElement);
+    } else {
+      npcsContainerElement.innerHTML = "";
+    }
+
+    for (let npc of npcs) {
+      const npcContainerElement = document.createElement("article");
+      npcContainerElement.classList.add("npc-container");
+      npcsContainerElement.append(npcContainerElement);
+
+      const npcNameElement = document.createElement("div");
+      npcNameElement.classList.add("npc-name");
+      npcNameElement.textContent = npc.getName();
+      npcContainerElement.append(npcNameElement);
+
+      const npcActionsContainerElement = document.createElement("div");
+      npcActionsContainerElement.classList.add("npc-actions-container");
+      npcContainerElement.append(npcActionsContainerElement);
+
+      const npcResponseElement = document.createElement("div");
+      npcResponseElement.classList.add("npc-response");
+      npcResponseElement.textContent = npc.response.reply;
+      npcContainerElement.append(npcResponseElement);
+
+      const actions = npc.getActions();
+      for (let action of actions) {
+        const actionButton = document.createElement("button");
+        actionButton.classList.add("npc-action-button");
+        actionButton.textContent = action;
+        actionButton.dataset.npcName = npc.getName();
+        actionButton.addEventListener("click", (e) => {
+          this.#interactNPC(e, npcResponseElement);
+        });
+        npcActionsContainerElement.append(actionButton);
+      }
+    }
+  }
+
+  #interactNPC(e, npcResponseElement) {
+    const npcName = e.target.dataset.npcName;
+    const action = e.target.textContent;
+    const response = this.#currentRoom.getNPC(npcName).interact(action);
+    // console.log("response: ", response);
+
+    npcResponseElement.textContent = response.reply;
+    const playerInventory = globalConditions.player.inventory;
+    const returnedObjects = response.returnedObjects || [];
+    globalConditions.player.inventory = [
+      ...playerInventory,
+      ...returnedObjects,
+    ];
+
+    this.#displayRoomDescriptionAndPlayerInventory();
+    this.#displayNPCActions();
+  }
+
+  #performAction(e) {
+    const destination = e.target.dataset.destination;
+    // change room and display actions
+    this.#contentElement.innerHTML = "";
+    this.#currentRoom = this.#roomFactory.getRoom(destination);
+    this.displayCurrentRoom();
+  }
+}
+
+const game = new Game();
+game.displayCurrentRoom();
+// console.log(game);
