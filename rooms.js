@@ -189,4 +189,11 @@ export const rooms = [
       },
     ],
   },
+  {
+    number: 9,
+    name: "circus",
+    description: `You have reached the end of chapter 1. Congratulations!
+    `,
+    actions: [],
+  },
 ];

@@ -213,8 +213,9 @@ export class Game {
   }
 }
 
-// const game = new Game();
-// game.displayCurrentRoom();
+const game = new Game();
+game.displayCurrentRoom();
+
 // console.log(game);
 
-const tester = new Tester();
+// const tester = new Tester();

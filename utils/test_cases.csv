@@ -33,3 +33,5 @@
 32,npc-action,,dragon,attack,You are deep inside the cave. You stand in front of a weak dragon...,You have defeated the dragon!
 33,action,outside,,,You are at the entrance of a dragon cave.,
 34,action,down,,,"It is a beautiful day outside. The room is full of sunshine. You decide to go out, and explore the surroundings.",
+35,action,down,,,You go down until you reach the creative realm. This is the place where you have found your sword.,
+36,action,down,,,You have reached the end of chapter 1. Congratulations!,
