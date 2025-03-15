@@ -84,10 +84,10 @@ export class Tester {
   }
 
   assert(testName, gameElement, value) {
-    if (gameElement.innerText !== value) {
+    if (gameElement && gameElement.innerText !== value) {
       throw new Error(`Test failed: ${gameElement.classList} !== ${value}`);
     }
-    console.log(`Test passed: ${testName} (${gameElement.innerText})`);
+    console.log(`Test passed: ${testName} (${gameElement?.innerText})`);
   }
 
   getRoomDescriptionElement() {

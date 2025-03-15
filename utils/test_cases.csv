@@ -1,5 +1,35 @@
 ﻿#,action type,destination,npc name,npc action,new room description,npc response reply
-1,action,left,,,You chose to go to the creative side of the realm.,
-2,action,return,,,"It is a beautiful day outside. The room is full of sunshine. You decide to go out, and explore the surroundings.",
-3,npc-action,,dragon,talk,,What would you like to talk about?
-4,npc-action,,dragon,say a joke,,Nice joke!
+1,action,left,,,You arrive at the swamp. What will you do next?,
+2,npc-action,,monkey,talk,,Nice talking to you! says the monkey.
+3,npc-action,,monkey,offer food,,You don't have any food...
+4,npc-action,,tiger,talk,,Nice talking to you! says the tiger.
+5,npc-action,,tiger,feed,,You don't have any food...
+6,action,right,,,"It is a beautiful day outside. The room is full of sunshine. You decide to go out, and explore the surroundings.",
+7,action,right,,,You are at the top of a hill... You notice a windmill and someone nearby.,
+8,npc-action,,inventor,talk,,Nice talking to you! says the inventor. Here are a pair of binoculars and a set of scuba diving. You might find them useful in your journey.
+9,npc-action,,inventor,use binoculars,,You look through the binoculars and notice a house nearby...
+10,action,right,,,You are inside the house.,
+11,npc-action,,house,pick food,,You grabed some food.
+12,npc-action,,house,pick money,,You picked some money.
+13,action,left,,,You are at the top of a hill... You notice a windmill and someone nearby.,
+14,action,left,,,"It is a beautiful day outside. The room is full of sunshine. You decide to go out, and explore the surroundings.",
+15,action,left,,,You arrive at the swamp. What will you do next?,
+16,action,dive,,,You are now underwater.,
+17,npc-action,,fish,feed,,The fish thank you for the food and offer you a set of pearls!
+18,npc-action,,fish,watch,,You watch the fish... They are swimming in banks...
+19,action,surface,,,You arrive at the swamp. What will you do next?,
+20,action,right,,,"It is a beautiful day outside. The room is full of sunshine. You decide to go out, and explore the surroundings.",
+21,action,down,,,You go down until you reach the creative realm. You notice there is a sword dug up in the ground.,
+22,npc-action,,sword,pull,,"You try to pull the sword out of the ground, but it's stuck..."
+23,npc-action,,sword,push,,Pushing the sword seems to have moved it a little bit...
+24,npc-action,,sword,cry,,Crying out loud won't do any good in this situation...
+25,npc-action,,fairy,talk,,The fairy greets you.
+26,npc-action,,fairy,offer pearls,,Thanks for the pearls! says the fairy. You are the best. I would like to give you a lot of strength!
+27,npc-action,,sword,pull,You go down until you reach the creative realm. This is the place where you have found your sword.,
+28,action,up,,,"It is a beautiful day outside. The room is full of sunshine. You decide to go out, and explore the surroundings.",
+29,action,up,,,You are at the entrance of a dragon cave. A large rock is blocking the way in.,
+30,npc-action,,rock,move,,You moved the rock away.
+31,action,deep inside,,,You are deep inside the cave. You stand in front of a fierce dragon...,
+32,npc-action,,dragon,attack,You are deep inside the cave. You stand in front of a weak dragon...,You have defeated the dragon!
+33,action,outside,,,You are at the entrance of a dragon cave.,
+34,action,down,,,"It is a beautiful day outside. The room is full of sunshine. You decide to go out, and explore the surroundings.",

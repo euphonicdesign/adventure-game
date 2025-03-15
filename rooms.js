@@ -55,7 +55,7 @@ export const rooms = [
   {
     number: 3,
     name: "underwater",
-    description: `You are now underwater`,
+    description: `You are now underwater.`,
     actions: [
       {
         action: "surface",

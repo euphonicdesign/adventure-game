@@ -10,7 +10,7 @@ export class NPCHouse extends NPC {
     if (action === "pick food") {
       if (!this.state.hasPickedFood) {
         this.state.hasPickedFood = true;
-        this.response.reply = "You grabed some food";
+        this.response.reply = "You grabed some food.";
         this.response.returnedObjects = ["food"];
         this.removeAction(action);
       }
@@ -18,7 +18,7 @@ export class NPCHouse extends NPC {
     if (action === "pick money") {
       if (!this.state.hasPickedMoney) {
         this.state.hasPickedMoney = true;
-        this.response.reply = "You picked some money";
+        this.response.reply = "You picked some money.";
         this.response.returnedObjects = ["money"];
         this.removeAction(action);
       }

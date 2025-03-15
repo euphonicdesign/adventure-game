@@ -213,8 +213,8 @@ export class Game {
   }
 }
 
-const game = new Game();
-game.displayCurrentRoom();
-console.log(game);
+// const game = new Game();
+// game.displayCurrentRoom();
+// console.log(game);
 
-// const tester = new Tester();
+const tester = new Tester();

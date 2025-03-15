@@ -12,7 +12,7 @@ export class NPCInventor extends NPC {
         this.state.hadTalked = true;
         this.response.returnedObjects = ["binoculars", "scuba"];
         this.response.reply =
-          "Nice talking to you! says the inventor. Here are a pair of binoculars and a set of scuba diving. You might find them useful in your journey";
+          "Nice talking to you! says the inventor. Here are a pair of binoculars and a set of scuba diving. You might find them useful in your journey.";
 
         const affectedRoom = roomFactory.getRoom("swamp");
         affectedRoom.actions.push({

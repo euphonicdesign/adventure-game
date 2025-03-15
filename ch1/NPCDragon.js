@@ -2,7 +2,7 @@ import { globalConditions } from "../globalConditions.js";
 import { NPC } from "../NPC.js";
 
 export class NPCDragon extends NPC {
-  interact(action) {
+  interact(action, currentRoom) {
     this.response.reply = "";
     this.response.returnedObjects = [];
     let inventory = globalConditions.player.inventory;
@@ -14,6 +14,8 @@ export class NPCDragon extends NPC {
           globalConditions.conditions.defeatedTheDragon = true;
           this.response.reply = "You have defeated the dragon!";
           this.removeAction(action);
+          currentRoom.description =
+            "You are deep inside the cave. You stand in front of a weak dragon...";
         }
       } else {
         this.response.reply = "You don't have any weapons with you...";
