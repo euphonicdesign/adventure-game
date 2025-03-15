@@ -20,7 +20,7 @@ export const rooms = [
       },
       {
         action: "down",
-        destination: "room 5",
+        destination: "creative realm",
       },
     ],
   },
@@ -60,6 +60,16 @@ export const rooms = [
       {
         action: "surface",
         destination: "swamp",
+      },
+    ],
+
+    npcs: [
+      {
+        name: "fish",
+        state: {
+          fed: false,
+        },
+        actions: ["feed", "watch"],
       },
     ],
   },
@@ -146,6 +156,36 @@ export const rooms = [
           hasPickedMoney: false,
         },
         actions: ["pick food", "pick money"],
+      },
+    ],
+  },
+  {
+    number: 8,
+    name: "creative realm",
+    description: `You go down until you reach the creative realm. You notice there is a sword dug up in the ground.
+    `,
+    actions: [
+      {
+        action: "up",
+        destination: "starting place",
+      },
+    ],
+    npcs: [
+      {
+        name: "fairy",
+        state: {
+          receivedPearls: false,
+          talked: false,
+        },
+        actions: ["talk"],
+      },
+      {
+        name: "sword",
+        state: {
+          removed: false,
+          pushed: false,
+        },
+        actions: ["pull", "push", "cry"],
       },
     ],
   },

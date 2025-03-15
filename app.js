@@ -215,5 +215,6 @@ export class Game {
 
 const game = new Game();
 game.displayCurrentRoom();
+console.log(game);
 
 // const tester = new Tester();

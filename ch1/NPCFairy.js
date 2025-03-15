@@ -8,16 +8,23 @@ export class NPCFairy extends NPC {
     let inventory = globalConditions.player.inventory;
 
     if (action === "talk") {
-      this.response.reply = "Nice talking to you!";
+      this.response.reply = "The fairy greets you.";
+      this.state.talked = true;
+      this.#checkWinningConditions();
     }
-    if (action === "offer book") {
-      this.response.reply = "Thanks for the book!";
-      globalConditions.player.inventory = inventory.filter(
-        (item) => item !== "book"
-      );
+    if (action === "offer pearls") {
+      if (!this.state.receivedPearls) {
+        this.state.receivedPearls = true;
+        this.response.reply = "Thanks for the pearls! says the fairy.";
+        globalConditions.player.inventory = inventory.filter(
+          (item) => item !== "pearls"
+        );
 
-      if (!globalConditions.player.inventory.includes("book")) {
-        this.removeAction(action);
+        if (!globalConditions.player.inventory.includes("pearls")) {
+          this.removeAction(action);
+        }
+
+        this.#checkWinningConditions();
       }
     }
     return this.response;
@@ -25,11 +32,12 @@ export class NPCFairy extends NPC {
 
   #checkWinningConditions() {
     if (!this.winningConditions) {
-      if (this.state.happiness && !this.state.hunger) {
+      if (this.state.receivedPearls && this.state.talked) {
         this.response.reply +=
-          " You are the best. I would like to give you a sword and a shield.";
-        this.response.returnedObjects = ["sword", "shield"];
+          " You are the best. I would like to give you a lot of strength!";
+        // this.response.returnedObjects = ["strength"];
         this.winningConditions = true;
+        globalConditions.conditions.receivedStrength = true;
       }
     }
   }
